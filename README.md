@@ -1,6 +1,8 @@
 # puzzle
 ### juego donde se deben juntar las pelotas conforme a su color
 
+[Click para jugar](https://davidgutierrezalvarez.github.io/Puzzle-Ball)
+
 
 - [x] agregar pelotas
 - [x] crear efecto de rebote
