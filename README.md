@@ -6,10 +6,11 @@
 
 - [x] agregar pelotas
 - [x] crear efecto de rebote
-- [ ] crear tubos
-- [ ] activar touche
-- [ ] tomar pelota
-- [ ] soltar pelota
+- [x] crear tubos
+- [x] activar touche
+- [x] tomar pelota
+- [x] soltar pelota
+- [ ] tomar la pelota del tope
 - [ ] crear primer nivel
 - [ ] crear menu
 - [ ] crear multiples niveles

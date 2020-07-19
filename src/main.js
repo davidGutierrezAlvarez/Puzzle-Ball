@@ -1,6 +1,4 @@
-
 import Bootloader from './Bootloader.js';
-
 
 const config = {
     title: "ball puzzle",
