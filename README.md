@@ -10,7 +10,10 @@
 - [x] activar touche
 - [x] tomar pelota
 - [x] soltar pelota
-- [ ] tomar la pelota del tope
+- [x] tomar la pelota del tope
+- [ ] automatizar generacion de bloques
+- [ ] crear pelotas de colores
+- [ ] crear automata que genere un nivel
 - [ ] crear primer nivel
 - [ ] crear menu
 - [ ] crear multiples niveles

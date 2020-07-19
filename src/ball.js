@@ -10,7 +10,8 @@ class Ball extends Phaser.GameObjects.Sprite {
 		this.body.setBounce(0.9);//rebote
 		//this.body.setFriction(1);
 		this.body.isCircle = true;
-		console.log(this.setInteractive());
+		//this.setInteractive();
+		this.depth = 1;
 	}
 
 }
