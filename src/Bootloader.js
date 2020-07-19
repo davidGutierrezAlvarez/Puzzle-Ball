@@ -1,9 +1,5 @@
 import Ball from './ball.js';
 
-
-
-
-
 class Bootloader extends Phaser.Scene {
     constructor() {
         super('Bootloader'); 
@@ -18,7 +14,7 @@ class Bootloader extends Phaser.Scene {
         this.load.on('complete', () => {
             console.log('Load complete');
         });
-        //this.Balls = [];
+
         this.Balls = this.add.group();
     }
 
@@ -39,12 +35,13 @@ class Bootloader extends Phaser.Scene {
 
 
         this.input.on('pointerdown', function () {
-            //var worldPoint = this.input.activePointer;//.positionToCamera(this.cameras.main);
-
-            console.log(this.pointer, this.pointer);
-            //this.Balls.add(new Ball(this, this.scale.width/2, 0, 'logo_gamma'));
-        });
-        console.log(this.pointer.x, this.pointer.y);
+            var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+      
+            //console.log(worldPoint);
+            this.Balls.add(new Ball(this, worldPoint.x, worldPoint.y, 'logo_gamma'));
+        
+        }, this);
+        //console.log(this.pointer.x, this.pointer.y);
         
 
     }

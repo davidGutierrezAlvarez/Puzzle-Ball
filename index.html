@@ -26,21 +26,18 @@
     <body>
         
         <div id="phaser_container">
-            <button id="fullscreen" onclick="fullscreen(document.getElementById('phaser_container'));"></button>
+            <button id="fullscreen" onclick="fullscreen();"></button>
         </div>
 
 
         <script src="./src/phaser.min.js"></script>
         <script src="./src/main.js" type="module"></script>
         <script type="text/javascript">
-            function fullscreen(e){
-              if (e.webkitRequestFullScreen) {
-                e.webkitRequestFullScreen();
-              } else if(e.mozRequestFullScreen) {
-                e.mozRequestFullScreen();
-              }
+            div = document.getElementById("phaser_container");
+            function fullscreen(){
+              div.webkitRequestFullscreen();
             }
-            fullscreen(document.getElementById('phaser_container'));
+            fullscreen();
         </script>
     </body>
     </html>

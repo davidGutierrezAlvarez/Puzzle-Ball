@@ -12,7 +12,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 		//this.body.setCircle();
 		this.body.setCircle();
         this.body.setFriction(0.5);
-        this.body.setBounce(1);
+        this.body.setBounce(0.8);
 	}
 
 	addCollision(scene, t) {
