@@ -13,11 +13,16 @@ body {
     background-size: cover;
     background-position: center;
     position: absolute;
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     border: none;
-    margin-top: 12px;
-    display: block;
-    left: 3%;
+    margin-top: 15px;
+    left: 85%;
+    display: flex;
+}
 
+
+
+#fullscreen:focus {
+    outline: 0px;
 }

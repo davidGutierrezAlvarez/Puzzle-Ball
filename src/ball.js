@@ -7,14 +7,15 @@ class Ball extends Phaser.GameObjects.Sprite {
 		scene.physics.world.enable(this);
 		//this.body.immovable = true;
 		this.body.setCollideWorldBounds(true);//collisionborder
-		this.body.setBounce(0.8);//rebote
+		this.body.world.bounds.top = -600;// = false;
+		this.body.setBounce(.95);//rebote
 		//this.body.setFriction(1);
 		this.body.isCircle = true;
 		//this.setInteractive();
 		this.depth = 1;
 		this.setScale(0.75);
-		this.body.setMaxSpeed(165);
-		this.body.setFriction(10, 10);
+		//this.body.setMaxSpeed(165);
+		//this.body.setFriction(10, 10);
 	}
 
 }

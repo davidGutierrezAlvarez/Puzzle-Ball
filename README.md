@@ -15,5 +15,5 @@
 - [x] crear pelotas de colores
 - [ ] crear automata que genere un nivel
 - [ ] crear primer nivel
-- [ ] crear menu
+- [x] crear menu
 - [ ] crear multiples niveles
