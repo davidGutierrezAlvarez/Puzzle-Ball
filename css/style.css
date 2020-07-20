@@ -1,0 +1,20 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #2c3e50;
+}
+
+#fullscreen {
+    background: white;
+    background: url(../assets/fullscreen.png);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    border: none;
+    margin: 15px;
+}

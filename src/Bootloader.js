@@ -29,39 +29,18 @@ class Bootloader extends Phaser.Scene {
 
     create() {
         //var fondo = this.add.image(this.scale.width/2, this.scale.height/2, "fondo2");
-        
+        //fondo.setScale(0.77);
+
         //crear lista interna de balls...
         //para cada beaker
-        this.beaker = new Beaker(this, 460, 350, 'beaker', this.BeakersColl);
-        this.beaker.box = []
-        for (var i = 0; i < 4; i++) {
-            var ball = new Ball(this, this.beaker.x, this.beaker.y-i*55, "logo_gamma");
-            this.beaker.box.push(ball);
-        }
-        this.Balls.addMultiple(this.beaker.box);
-        this.Beakers.add(this.beaker);
+        this.newBeaker(85, 350, 4);
+        this.newBeaker(210, 350, 4);
+        this.newBeaker(335, 350, 4);
+        this.newBeaker(460, 350, 4);
+        this.newBeaker(210, 660, 4);
+        this.newBeaker(335, 660, 0);
+       
 
-
-
-        this.beaker = new Beaker(this, 260, 350, 'beaker', this.BeakersColl);
-        this.beaker.box = []
-        for (var i = 0; i < 3; i++) {
-            var ball = new Ball(this, this.beaker.x, this.beaker.y-i*55, "logo_gamma");
-            this.beaker.box.push(ball);
-        }
-        this.Balls.addMultiple(this.beaker.box);
-        this.Beakers.add(this.beaker);
-
-
-        
-        this.beaker = new Beaker(this, 260, 650, 'beaker', this.BeakersColl);
-        this.beaker.box = []
-        for (var i = 0; i < 2; i++) {
-            var ball = new Ball(this, this.beaker.x, this.beaker.y-i*55, "logo_gamma");
-            this.beaker.box.push(ball);
-        }
-        this.Balls.addMultiple(this.beaker.box);
-        this.Beakers.add(this.beaker);
 
         //this.ball = new Ball(this, 260, 20, "logo_gamma");
         //this.ball.body.moves = false;
@@ -69,40 +48,13 @@ class Bootloader extends Phaser.Scene {
         //console.log(this.Beakers.getChildren());
 
 
-        //fondo.setScale(0.77);
 
-
-        /*this.physics.pause();
-        this.input.on('pointerdown', function (pointer) {
-            var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
-            this.Balls.add(new Ball(this, worldPoint.x, worldPoint.y, 'logo_gamma'));
-            console.log(this.physics.resume());
-
-        }, this);*/
 
 
         this.input.on('pointerdown',this.startDrag, this);
 
 
 
-
-        /*console.log(this.Beakers.getChildren());
-        this.Beakers.getChildren().forEach(item => {
-            console.log("ja!", item.on);
-            item.on('pointerover', function () {
-                item.setTint(0x7878ff);
-            });
-        });*/
-        /*.on('pointerover', function () {
-            console.log("ja!");
-        });*/
-        
-        /*this.input.on('pointermove', function () {
-            var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
-            //this.Balls.add(new Ball(this, worldPoint.x, worldPoint.y, 'logo_gamma'));
-
-            //this.physics.add.collider(this.Balls, worldPoint);
-        }, this);*/
 
         this.physics.add.collider(this.Balls, this.Balls);
         this.physics.add.collider(this.Balls, this.BeakersColl);
@@ -118,8 +70,6 @@ class Bootloader extends Phaser.Scene {
     startDrag(pointer, targets) {
         this.input.off('pointerdown', this.startDrag, this);
         this.dragObj = targets[0];
-
-        //this.input.on('pointermove', this.doDrag, this);
         this.input.on('pointerup', this.stopDrag, this);
     }
 
@@ -127,7 +77,6 @@ class Bootloader extends Phaser.Scene {
     stopDrag() {
         if(this.dragObj) {
             /*si se ha seleccionado un objeto*/
-            //console.log(this.dragObj.box.pop());
             if(!this.active) {
                 this.ball = this.dragObj.box.pop();
                 if (this.ball != undefined) {
@@ -136,22 +85,36 @@ class Bootloader extends Phaser.Scene {
                     this.ball.x = this.dragObj.x;
                     this.ball.y = this.dragObj.y-140;
                     this.active = true;
-                    console.log(this.ball);
                 }
             } else {
-                this.ball.body.moves = true;
-                this.ball.x = this.dragObj.x;
-                this.ball.y = this.dragObj.y-140;
-                this.active = false;
+                if(this.dragObj.box.length < 4) {
+                    this.ball.body.moves = true;
+                    this.ball.x = this.dragObj.x;
+                    this.ball.y = this.dragObj.y-140;
+                    this.active = false;
 
-                this.dragObj.box.push(this.ball);   
+                    this.dragObj.box.push(this.ball);   
+                }
             }
         }
 
         this.input.on('pointerdown', this.startDrag, this);
-        //this.input.off('pointermove', this.stopDrag, this);
         this.input.off('pointerup', this.stopDrag, this);
     }
+
+
+    newBeaker(x, y, length) {
+        var beaker = new Beaker(this, x, y, 'beaker', this.BeakersColl);
+        beaker.box = []
+        for (var i = 0; i < length; i++) {
+            var ball = new Ball(this, beaker.x, beaker.y-i*55, "logo_gamma");
+            beaker.box.push(ball);
+        }
+        this.Balls.addMultiple(beaker.box);
+        this.Beakers.add(beaker);
+    }
+
+
 
 }
 export default Bootloader;
