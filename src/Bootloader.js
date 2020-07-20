@@ -33,28 +33,9 @@ class Bootloader extends Phaser.Scene {
     create() {
         //var fondo = this.add.image(this.scale.width/2, this.scale.height/2, "fondo2");
         //fondo.setScale(0.77);
-        var l = [];
-        l.push('a');
-        l.push('b');
-        l.push('c');
-        l.push('d');
-        l.push('e');
-        console.log(l);
-        //crear lista interna de balls...
-        //para cada beaker
-        this.newBeaker(85, 350, 4, l);
-        this.newBeaker(210, 350, 4, l);
-        this.newBeaker(335, 350, 4, l);
-        this.newBeaker(460, 350, 4, l);
-        this.newBeaker(210, 660, 4, l);
-        this.newBeaker(335, 660, 0, l);
-       
 
+        this.createLevel(7);
 
-        //this.ball = new Ball(this, 260, 20, "logo_gamma");
-        //this.ball.body.moves = false;
-        //console.log(this.beaker.box);
-        //console.log(this.Beakers.getChildren());
 
 
 
@@ -102,7 +83,7 @@ class Bootloader extends Phaser.Scene {
                     this.ball.y = this.dragObj.y-140;
                     this.active = false;
 
-                    this.dragObj.box.push(this.ball);   
+                    this.dragObj.box.push(this.ball);
                 }
             }
         }
@@ -116,11 +97,42 @@ class Bootloader extends Phaser.Scene {
         var beaker = new Beaker(this, x, y, 'beaker', this.BeakersColl);
         beaker.box = []
         for (var i = 0; i < length; i++) {
-            var ball = new Ball(this, beaker.x, beaker.y-i*55, pelota[Math.floor(Math.random() * 4)]);
+            var ball = new Ball(this, beaker.x, beaker.y-i*55, pelota);
             beaker.box.push(ball);
         }
         this.Balls.addMultiple(beaker.box);
         this.Beakers.add(beaker);
+    }
+
+    createLevel(elements) {
+        var l = ['a', 'b', 'c', 'd', 'e'];
+
+        var h = this.scale.height/2
+        if(elements < 5) {
+            var w = this.scale.width/(elements+1);
+            for (var i = 1; i <= elements; i++) {
+                this.newBeaker(w*i, h, 4, l[i%5]);
+            }
+        } else if(elements < 13) {
+            var row = Math.floor(elements/2) + (elements%2 != 0 ? 1 : 0);
+            var w = this.scale.width/(row+1);
+            var col=1;
+            var x;
+            var y;
+            h -= 350;
+
+            for (var i = 0; i < elements; i++) {
+                col = Math.floor((i)/row);
+                x = w*(i%row+1) + (elements%2 != 0 ? (col*w/2) : 0);
+                y = h+(300*(col+1));
+                this.newBeaker(x, y,  i < elements-1 ? 4 : 0, l[i%5]);
+            }
+        } else {
+            this.add.text(  45,
+                            this.scale.height/2,
+                            'Elementos no soportados', 
+                            { font: "40px Arial", fill: "#fff" });
+        }
     }
 
 

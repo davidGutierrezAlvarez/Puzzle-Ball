@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #2c3e50;
+    background-color: #282923;
 }
 
 #fullscreen {
@@ -13,8 +13,11 @@ body {
     background-size: cover;
     background-position: center;
     position: absolute;
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
     border: none;
-    margin: 25px;
+    margin-top: 12px;
+    display: block;
+    left: 3%;
+
 }

@@ -11,8 +11,8 @@
 - [x] tomar pelota
 - [x] soltar pelota
 - [x] tomar la pelota del tope
-- [ ] automatizar generacion de bloques
-- [ ] crear pelotas de colores
+- [x] automatizar generacion de bloques
+- [x] crear pelotas de colores
 - [ ] crear automata que genere un nivel
 - [ ] crear primer nivel
 - [ ] crear menu

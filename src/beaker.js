@@ -10,11 +10,11 @@ class Beaker extends Phaser.GameObjects.Sprite {
 		this.setScale(0.7);
 
 
-        var rect = scene.add.rectangle(x-28, y, 2, 225, 0x000000, 1000);//0x000000
+        var rect = scene.add.rectangle(x-28, y, 1, 225, 0x000000, 1000);//0x000000
         this.createBorder(x, y, rect, group, scene);
-        var rect = scene.add.rectangle(x+28, y, 2, 225, 0x000000, 1000);
+        var rect = scene.add.rectangle(x+28, y, 1, 225, 0x000000, 1000);
         this.createBorder(x, y, rect, group, scene);
-        var rect = scene.add.rectangle(x, y+107, 60, 2, 0x000000, 1000);
+        var rect = scene.add.rectangle(x, y+107, 60, 1, 0x000000, 1000);
         this.createBorder(x, y, rect, group, scene);
         
 	}
@@ -24,6 +24,7 @@ class Beaker extends Phaser.GameObjects.Sprite {
 		//rect.body.setCollideWorldBounds(true);//collisionborder
 		rect.body.immovable = true;
 		rect.body.moves = false;
+		rect.depth = -1;
 
 		group.add(rect);
 	}
