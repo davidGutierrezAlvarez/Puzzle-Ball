@@ -12,9 +12,12 @@ class Bootloader extends Phaser.Scene {
         this.load.image('fondo1', '1.png');
         this.load.image('fondo2', '2.png');
         this.load.image('fondo3', '3.png');
-        this.load.image('beaker', 'beaker.png');
-        this.load.image('base', 'base.png');
-        this.load.image('logo_gamma', 'logo_gamma.png');
+        this.load.image('beaker', 'beaker2.png');
+        this.load.image('a', 'a.png');
+        this.load.image('b', 'b.png');
+        this.load.image('c', 'c.png');
+        this.load.image('d', 'd.png');
+        this.load.image('e', 'e.png');
 
         this.load.on('complete', () => {
             console.log('Load complete');
@@ -30,15 +33,21 @@ class Bootloader extends Phaser.Scene {
     create() {
         //var fondo = this.add.image(this.scale.width/2, this.scale.height/2, "fondo2");
         //fondo.setScale(0.77);
-
+        var l = [];
+        l.push('a');
+        l.push('b');
+        l.push('c');
+        l.push('d');
+        l.push('e');
+        console.log(l);
         //crear lista interna de balls...
         //para cada beaker
-        this.newBeaker(85, 350, 4);
-        this.newBeaker(210, 350, 4);
-        this.newBeaker(335, 350, 4);
-        this.newBeaker(460, 350, 4);
-        this.newBeaker(210, 660, 4);
-        this.newBeaker(335, 660, 0);
+        this.newBeaker(85, 350, 4, l);
+        this.newBeaker(210, 350, 4, l);
+        this.newBeaker(335, 350, 4, l);
+        this.newBeaker(460, 350, 4, l);
+        this.newBeaker(210, 660, 4, l);
+        this.newBeaker(335, 660, 0, l);
        
 
 
@@ -103,11 +112,11 @@ class Bootloader extends Phaser.Scene {
     }
 
 
-    newBeaker(x, y, length) {
+    newBeaker(x, y, length, pelota) {
         var beaker = new Beaker(this, x, y, 'beaker', this.BeakersColl);
         beaker.box = []
         for (var i = 0; i < length; i++) {
-            var ball = new Ball(this, beaker.x, beaker.y-i*55, "logo_gamma");
+            var ball = new Ball(this, beaker.x, beaker.y-i*55, pelota[Math.floor(Math.random() * 4)]);
             beaker.box.push(ball);
         }
         this.Balls.addMultiple(beaker.box);
