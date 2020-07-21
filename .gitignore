@@ -1,0 +1,5 @@
+def/
+node_modules/
+.editorconfig
+.gamma
+*.json
