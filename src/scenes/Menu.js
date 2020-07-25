@@ -9,12 +9,17 @@ class Menu extends Phaser.Scene {
         this.level = new Level;
         console.log("carga menu");
         this.y = 0;
-        this.n =  {x: 280, y: 500 };
+        this.cameraPosition =  {x: 280, y: 500 };
+        this.move = false;
+        this.scene.add("Level", this.level);
+        this.scene.bringToTop("Menu");
     }
 
     create() {
-        var rect = this.add.rectangle(0, 0, this.scale.width*3, this.scale.height*3, 0x282923, 1);//0x000000
-            
+        var back = this.add.rectangle(0, 0, this.scale.width, this.scale.height*3, 0x282923, 1);//0x000000
+        back.setOrigin(0,0);
+
+
         this.add.text(  90,
                         125,
                         'TEXTO MAMALON', 
@@ -26,7 +31,7 @@ class Menu extends Phaser.Scene {
         var sep = 25;//separacion entre cuadros
         var x_i = 75;//inicio donde se colocan las x
         var y_i = 275;//inicio donde se colocan las y
-        for (var i = 0; i < 44; i++) {
+        for (var i = 0; i < 52; i++) {
             x = i%5;
             y = Math.floor(i/5);
             var rect = this.add.rectangle((size+sep)*x+x_i, (size+sep)*y+y_i, size, size, 0xC0A66D, 1000);//0x000000
@@ -41,15 +46,27 @@ class Menu extends Phaser.Scene {
         this.input.on('pointerdown',this.startDrag, this);
         
         this.input.on('pointermove', function(pointer) {
-            console.log(Math.floor(pointer.x), Math.floor(pointer.y));
+            //console.log(Math.floor(pointer.x), Math.floor(pointer.y));
             this.y -= pointer.y;
-            this.n.y += this.y;
+            this.cameraPosition.y += this.y;
             this.y = pointer.y;
-            console.log(rect.pointer);
+
+            if (this.cameraPosition.y < 500) {
+                /*evita salir de la pantalla por la parte superior*/
+                this.cameraPosition.y = 500;
+            }
+
+            if (this.cameraPosition.y > 1700) {
+                /*evita salir de la pantalla por la parte inferior*/
+                this.cameraPosition.y = 1700;
+            }
+
+            this.move = true;
+            
 
         }, this);
         
-        this.cameras.main.startFollow(this.n);
+        this.cameras.main.startFollow(this.cameraPosition);
     }
 
     update(time, delta) {
@@ -57,6 +74,8 @@ class Menu extends Phaser.Scene {
     }
 
     startDrag(pointer, targets) {
+        this.y = pointer.y;
+
         this.input.off('pointerdown', this.startDrag, this);
         this.dragObj = targets[0];
         this.input.on('pointerup', this.stopDrag, this);
@@ -66,17 +85,16 @@ class Menu extends Phaser.Scene {
     stopDrag() {
         if(this.dragObj) {
             /*si se ha seleccionado un objeto*/
-            if(!this.active) {
+            if(!this.active && !this.move) {
                 if (this.dragObj.value != undefined) {
-                    try {
-                        this.scene.add("Level", this.level);
-                    } catch { }
+                    
 
                     this.level.up(this.dragObj.value);
 
                     this.scene.bringToTop("Level");
                 }
             }
+            this.move = false;
         }
 
         this.input.on('pointerdown', this.startDrag, this);

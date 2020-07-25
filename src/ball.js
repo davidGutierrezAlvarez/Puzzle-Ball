@@ -7,7 +7,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 		scene.physics.world.enable(this);
 		//this.body.immovable = true;
 		this.body.setCollideWorldBounds(true);//collisionborder
-		this.body.world.bounds.top = -600;// = false;
+		this.body.world.bounds.top = -600;
 		this.body.setBounce(.95);//rebote
 		//this.body.setFriction(1);
 		this.body.isCircle = true;

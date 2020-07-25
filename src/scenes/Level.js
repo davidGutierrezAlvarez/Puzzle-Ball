@@ -15,8 +15,9 @@ class Level extends Phaser.Scene {
     }
 
     create() {
-        var rect = this.add.rectangle(0, 0, this.scale.width*3, this.scale.height*3, 0x282923, 1);//0x000000
-            
+        var back = this.add.rectangle(0, 0, this.scale.width, this.scale.height, 0x282923, 1);//0x000000
+        back.setOrigin(0,0);
+
         var rect = this.add.rectangle(80, 50, 150, 75, 0xffffff, 1000);//0x000000
         rect.return = true;
         rect.setInteractive();
@@ -27,7 +28,7 @@ class Level extends Phaser.Scene {
 
         this.add.text(  180,
                         150,
-                        'NIVEL' + this.value, 
+                        'NIVEL ' + this.value, 
                         { font: "37px Arial", fill: "#fff" });
         
             
