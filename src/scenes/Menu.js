@@ -1,13 +1,20 @@
+import Level from './Level.js';
+
 class Menu extends Phaser.Scene {
     constructor() {
         super({key: 'Menu'});
     }
 
     preload() {
-
+        this.level = new Level;
+        console.log("carga menu");
+        this.y = 0;
+        this.n =  {x: 280, y: 500 };
     }
 
     create() {
+        var rect = this.add.rectangle(0, 0, this.scale.width*3, this.scale.height*3, 0x282923, 1);//0x000000
+            
         this.add.text(  90,
                         125,
                         'TEXTO MAMALON', 
@@ -19,7 +26,7 @@ class Menu extends Phaser.Scene {
         var sep = 25;//separacion entre cuadros
         var x_i = 75;//inicio donde se colocan las x
         var y_i = 275;//inicio donde se colocan las y
-        for (var i = 0; i < 37; i++) {
+        for (var i = 0; i < 44; i++) {
             x = i%5;
             y = Math.floor(i/5);
             var rect = this.add.rectangle((size+sep)*x+x_i, (size+sep)*y+y_i, size, size, 0xC0A66D, 1000);//0x000000
@@ -31,10 +38,18 @@ class Menu extends Phaser.Scene {
             rect.setInteractive();
         }
 
-
         this.input.on('pointerdown',this.startDrag, this);
         
+        this.input.on('pointermove', function(pointer) {
+            console.log(Math.floor(pointer.x), Math.floor(pointer.y));
+            this.y -= pointer.y;
+            this.n.y += this.y;
+            this.y = pointer.y;
+            console.log(rect.pointer);
 
+        }, this);
+        
+        this.cameras.main.startFollow(this.n);
     }
 
     update(time, delta) {
@@ -53,7 +68,13 @@ class Menu extends Phaser.Scene {
             /*si se ha seleccionado un objeto*/
             if(!this.active) {
                 if (this.dragObj.value != undefined) {
-                    this.scene.start("Level"+this.dragObj.value);
+                    try {
+                        this.scene.add("Level", this.level);
+                    } catch { }
+
+                    this.level.up(this.dragObj.value);
+
+                    this.scene.bringToTop("Level");
                 }
             }
         }

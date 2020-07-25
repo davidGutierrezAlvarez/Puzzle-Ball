@@ -8,6 +8,7 @@ class Load extends Phaser.Scene {
     preload() {
         this.pelota = ['a', 'b', 'c', 'd', 'e'];
         this.Balls = this.add.group();
+        this.continue = false;
     }
 
     create() {
@@ -27,13 +28,23 @@ class Load extends Phaser.Scene {
         }
         this.physics.add.collider(this.Balls, this.Balls);
         
-            
+        this.input.on('pointerdown', function (event) {
+            if (this.continue) {
+                //this.scene.bringToTop('Menu');
+                this.scene.start('Menu');
+            }
+        }, this);
 
     }
 
     update(time, delta) {
         if (Math.floor(time/1000+1)%8 == 0) {
-            this.scene.start("Menu");
+            this.continue = true;
+            var text = this.add.text(  120,
+                        425,
+                        'click para continuar', 
+                        { font: "34px Arial", fill: "#f1f1f1" });
+
         }
     }
 }

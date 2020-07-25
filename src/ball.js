@@ -13,9 +13,12 @@ class Ball extends Phaser.GameObjects.Sprite {
 		this.body.isCircle = true;
 		//this.setInteractive();
 		this.depth = 1;
-		this.setScale(0.75);
+		this.setScale(3);
 		//this.body.setMaxSpeed(165);
 		//this.body.setFriction(10, 10);
+		//console.log(scene.add);
+		//var v = scene.add.Circle(x, y, 30);//0x000000
+        
 	}
 
 }

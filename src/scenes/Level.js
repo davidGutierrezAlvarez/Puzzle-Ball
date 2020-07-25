@@ -3,8 +3,7 @@ import Beaker from '../beaker.js';
 
 class Level extends Phaser.Scene {
     constructor(level) {
-        super({key: 'Level'+level});
-        this.value = level;
+        super({key: 'Level', active: true});
     }
 
     preload() {
@@ -16,6 +15,8 @@ class Level extends Phaser.Scene {
     }
 
     create() {
+        var rect = this.add.rectangle(0, 0, this.scale.width*3, this.scale.height*3, 0x282923, 1);//0x000000
+            
         var rect = this.add.rectangle(80, 50, 150, 75, 0xffffff, 1000);//0x000000
         rect.return = true;
         rect.setInteractive();
@@ -37,11 +38,15 @@ class Level extends Phaser.Scene {
 
         this.physics.add.collider(this.Balls, this.Balls);
         this.physics.add.collider(this.Balls, this.BeakersColl);
-
     }
 
     update(time, delta) {
 
+    }
+
+    up(value) {
+        this.value = value;
+         this.scene.restart();
     }
 
 
@@ -56,8 +61,8 @@ class Level extends Phaser.Scene {
         if(this.dragObj) {
             /*si se ha seleccionado un objeto*/
             if (this.dragObj.return) {
-
-                this.scene.start("Menu");
+                this.scene.moveDown();
+                //this.scene.start("Menu");
                 //console.log(delete(this.scene));
                 //this.scene.Level.value++;
                 //this.scene.restart();

@@ -1,6 +1,5 @@
 import Ball from './ball.js';
 import Beaker from './beaker.js';
-import Level from './scenes/Level.js';
 
 class Bootloader extends Phaser.Scene {
     constructor() {
@@ -15,11 +14,14 @@ class Bootloader extends Phaser.Scene {
         this.load.image('fondo2', '2.png');
         this.load.image('fondo3', '3.png');
         this.load.image('beaker', 'beaker2.png');
-        this.load.image('a', 'a.png');
-        this.load.image('b', 'b.png');
-        this.load.image('c', 'c.png');
-        this.load.image('d', 'd.png');
-        this.load.image('e', 'e.png');
+        this.load.image('a', 'purple_ball.png');
+        this.load.image('b', 'red_ball.png');
+        //this.load.image('c', 'shinyball.png');
+        this.load.image('d', 'yellow_ball.png');
+        this.load.image('e', 'aqua_ball.png');
+        this.load.image('f', 'pangball.png');
+        this.load.image('g', 'green_ball.png');
+        this.load.image('c', 'blue_ball.png');
 
         this.load.on('complete', () => {
             console.log('Load complete');
@@ -29,9 +31,10 @@ class Bootloader extends Phaser.Scene {
 
     create() {
 
-        for (var i = 0; i < 37; i++) {
-            this.scene.add("Level"+(i+1), new Level(i+1));
-        }
+        //for (var i = 0; i < 37; i++) {
+        //this.scene.add("Level", level);
+        //console.log(this.level, "mamalon");
+        //}
         this.scene.start("Load");
     }
 
